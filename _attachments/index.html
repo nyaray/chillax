@@ -1,29 +1,73 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My New CouchApp</title>
+    <title>Chillax. It's under control.</title>
     <link rel="stylesheet" href="style/main.css" type="text/css">
   </head>
   <body>
-    <div id="account"></div>
+    <ul id="container">
+      <li><h1>Chillax.</h1></li>
+    	<li id="sidebar">
+        <h2>Organise</h2>
+        <a href="#" id="createproj">New project</a>
+        <a class="projectlink" id="inbox" href="#">Inbox</a>
+        <hr />
+        <ul id="projectlist"></ul>
+      </li>
+    	<li id="window">
+        <h2>Focus</h2> - <h3 id="tasksource"></h3><br />
 
-    <h1>Generated CouchApp</h1>
+        <form id="projectform">
+        <fieldset>
+        	<legend>Create a project</legend>
+          <input placeholder="Name" class="createname" name="createname"
+            type="text" />
+          <input placeholder="Due" class="createdue" name="createdue"
+            type="text" /><br />
+          <button type="button" class="cancel">Cancel</button>
+          <button type="button" class="createsubmit">Create</button>
+        </fieldset>
+        </form>
 
-    <div id="profile"></div>
-    <div id="items"></div>
+        <form class="taskform">
+        <fieldset>
+        	<legend>Add a task</legend>
+          <input placeholder="Name" class="addname" name="addname" type="text" />
+          <br />
+          <button type="button" class="cancel">Cancel</button>
+          <button type="button" class="addsubmit">Add</button>
+        </fieldset>
+        </form>
 
-    <div id="sidebar">
-      <p>Edit welcome message.</p>
-      <p>Ideas: You could easily turn this into a photo sharing app, or a grocery list, or a chat room.</p>
-    </div>
+        <!--
+        <form>
+        <fieldset>
+        	<legend>Add a task</legend>
+          <input placeholder="Name" id="addname" name="addname" type="text" />
+          <input placeholder="Due" id="adddue" name="adddue"
+            type="text" /><br />
+          <textarea placeholder="Description" id="adddesc"
+            name="adddesc" type="text"></textarea><br />
+          <button type="button" class="cancel">Cancel</button>
+          <button type="button" id="addsubmit">Add</button>
+        </fieldset>
+        </form>
+        -->
+
+        <h2>Tasks</h2>
+        <ul id="tasklist"></ul>
+
+        <h3 style="margin-top:50px;">Debug</h3><br />
+        <div id="debug" style="width:95%; height:150px;
+          padding:15px; background-color:#ccc; vertical-align:top;
+          overflow:scroll;">
+        </div>
+      </li>
+    </ul>
   </body>
   <script src="vendor/couchapp/loader.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    $.couch.app(function(app) {
-      $("#account").evently("account", app);
-      $("#profile").evently("profile", app);
-      $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
-      $("#items").evently("items", app);
-    });
-  </script>
+  <script src="/_utils/script/json2.js"></script>  
+  <script src="/_utils/script/jquery.js?1.3.1"></script>  
+  <script src="/_utils/script/jquery.couch.js?0.9.0"></script>
+  <script src="./main.js"></script>
 </html>

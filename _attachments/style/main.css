@@ -1,75 +1,131 @@
-/* add styles here */
+* {
+  margin:0;
+  padding:0;
+  border:none;
+  list-style:none;
+}
+
+a { text-decoration:none; }
+a:link    { color:#55d; }
+a:visited { color:#55d; }
+a:hover   { color:#77f; }
+a:active  { color:#77f; }
 
 body {
-  font:1em Helvetica, sans-serif;
-  padding:4px;
+  font:1em "Georgia", sans-serif;
+  color:#444;
 }
 
 h1 {
-  margin-top:0;
+  font-size:42pt;
+  margin-right:30px;
+  padding:10px 50px;
+  text-align:right;
 }
 
-#account {
-  float:right;
+h2, h3 {
+  display:inline-block;
+  margin-bottom:15px;
 }
 
-#profile {
-  border:4px solid #edd;
-  background:#fee;
-  padding:8px;
-  margin-bottom:8px;
+hr {
+  margin:5px 0;
+  border: 1px solid #aaa;
 }
 
-#items {
-  border:4px solid #dde;
-  background:#eef;
-  padding:8px;
-  width:60%;
-  float:left;
+#projectform {
+  background-color:#ddd;
+}
+
+fieldset {
+  margin-bottom:10px;
+  padding:10px;
+
+}
+
+input, textarea, button {
+  margin-bottom:10px;
+  padding:7px;
+  border-radius:15px;
+}
+
+input, textarea {
+  min-width:90%;
+}
+
+button.cancel {
+  width:60px;
+}
+
+button#createsubmit,
+button.addsubmit {
+  width:150px;
+}
+
+textarea {
+  width:420px;
+  height:50px;
+}
+
+#container {
+  width:960px;
+  margin:0 auto;
+
+  background-color:#ddd;
+  list-style:none;
+}
+
+#sidebar, #window {
+  display:inline-block;
+  margin:0px;
+  padding:15px;
+  vertical-align:top;
+  background-color:#eee;
 }
 
 #sidebar {
-  border:4px solid #dfd;
-  padding:8px;
-  float:right;
-  width:30%;
+  width:212px;
+  margin-right:-5px;
+  border-right:8px solid #444;
 }
 
-#items li {
-  border:4px solid #f5f5ff;
-  background:#fff;
-  padding:8px;
-  margin:4px 0;
+#createproj {
+  display:block;
+  margin-bottom:15px;
 }
 
-form {
-  padding:4px;
-  margin:6px;
-  background-color:#ddd;  
+#window {
+  width:680px;
 }
 
-div.avatar {
-  padding:2px;
-  padding-bottom:0;
-  margin-right:4px;
-  float:left;
-  font-size:0.78em;
-  width : 60px;
-  height : 60px;
-  text-align: center;
+#tasklist {
+  padding:15px;
+  background-color:#fff;
 }
 
-div.avatar .name {
-  padding-top:2px;
+.task {
+  position:relative;
+  padding:5px;
+  background-color:#e5e5e5;
 }
 
-div.avatar img {
-  margin:0 auto;
-  padding:0;
-  width : 40px;
-  height : 40px;
+.taskname {
+  margin-right:15px;
 }
 
-#items ul {
-  list-style: none;
+.taskend {
+  position:absolute;
+  right:15px;
+}
+
+.taskdelete {
+  visibility:hidden;
+}
+
+.task:hover .taskdelete {
+  visibility:visible;
+}
+
+.taskdue {
+  color:#999;
 }
