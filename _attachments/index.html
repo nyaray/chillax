@@ -2,57 +2,38 @@
 <html>
   <head>
     <title>Chillax. It's under control.</title>
+    <link rel="stylesheet" href="style/reset.css" type="text/css">
     <link rel="stylesheet" href="style/main.css" type="text/css">
   </head>
   <body>
     <ul id="container">
-      <li><h1>Chillax.</h1></li>
+      <li id="header"><h1>Chillax.</h1></li>
     	<li id="sidebar">
         <h2>Organise</h2>
-        <a href="#" id="createproj">New project</a>
+        <form id="projectform">
+          <input placeholder="Create project" class="createname"
+            name="createname" type="text" /><br />
+          <button type="button" class="createsubmit">Create</button>
+          <button type="button" class="cancelproj cancel">Clear</button>
+        </form>
+
         <a class="projectlink" id="inbox" href="#">Inbox</a>
         <hr />
         <ul id="projectlist"></ul>
       </li>
-    	<li id="window">
-        <h2>Focus</h2> - <h3 id="tasksource"></h3><br />
 
-        <form id="projectform">
-        <fieldset>
-        	<legend>Create a project</legend>
-          <input placeholder="Name" class="createname" name="createname"
-            type="text" />
-          <input placeholder="Due" class="createdue" name="createdue"
-            type="text" /><br />
-          <button type="button" class="cancel">Cancel</button>
-          <button type="button" class="createsubmit">Create</button>
-        </fieldset>
-        </form>
+    	<li id="window">
+        <h2 id="tasksource"></h2> - 
+        <h3>Focus</h3>
+        <h4>(Gather your tasks)</h4><br />
 
         <form class="taskform">
-        <fieldset>
-        	<legend>Add a task</legend>
-          <input placeholder="Name" class="addname" name="addname" type="text" />
+          <input placeholder="Create task" class="addname"
+            name="addname" type="text" />
           <br />
-          <button type="button" class="cancel">Cancel</button>
           <button type="button" class="addsubmit">Add</button>
-        </fieldset>
-        </form>
-
-        <!--
-        <form>
-        <fieldset>
-        	<legend>Add a task</legend>
-          <input placeholder="Name" id="addname" name="addname" type="text" />
-          <input placeholder="Due" id="adddue" name="adddue"
-            type="text" /><br />
-          <textarea placeholder="Description" id="adddesc"
-            name="adddesc" type="text"></textarea><br />
           <button type="button" class="cancel">Cancel</button>
-          <button type="button" id="addsubmit">Add</button>
-        </fieldset>
         </form>
-        -->
 
         <h2>Tasks</h2>
         <ul id="tasklist"></ul>

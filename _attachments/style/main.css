@@ -14,6 +14,7 @@ a:active  { color:#77f; }
 body {
   font:1em "Georgia", sans-serif;
   color:#444;
+  background-color:#aaa;
 }
 
 h1 {
@@ -23,9 +24,9 @@ h1 {
   text-align:right;
 }
 
-h2, h3 {
+h2, h3, h4, h5, h6 {
   display:inline-block;
-  margin-bottom:15px;
+  margin-bottom:8px;
 }
 
 hr {
@@ -33,28 +34,40 @@ hr {
   border: 1px solid #aaa;
 }
 
-#projectform {
-  background-color:#ddd;
+#header {
+  text-shadow:1px 1px 3px #fff;
+  border-bottom:4px dashed #ccc;
 }
 
-fieldset {
-  margin-bottom:10px;
-  padding:10px;
-
+#projectform {
+  background-color:#ddd;
 }
 
 input, textarea, button {
   margin-bottom:10px;
   padding:7px;
-  border-radius:15px;
+  border-radius:8px;
 }
 
-input, textarea {
-  min-width:90%;
+.taskform input, textarea {
+  min-width:98%;
 }
 
-button.cancel {
+.taskeditor .editname {
+  min-width:76%;
+}
+
+.taskeditor {
+  border:2px solid #bbb;
+}
+
+button.cancel, .updatecancel {
   width:60px;
+  opacity:0.5;
+}
+
+button.cancel:hover, .updatecancel:hover {
+  opacity:1;
 }
 
 button#createsubmit,
@@ -71,6 +84,7 @@ textarea {
   width:960px;
   margin:0 auto;
 
+  box-shadow:0 0 30px #222;
   background-color:#ddd;
   list-style:none;
 }
@@ -78,20 +92,25 @@ textarea {
 #sidebar, #window {
   display:inline-block;
   margin:0px;
-  padding:15px;
+  padding:5px;
   vertical-align:top;
-  background-color:#eee;
 }
 
 #sidebar {
   width:212px;
-  margin-right:-5px;
-  border-right:8px solid #444;
+  margin-right:10px;
 }
 
-#createproj {
-  display:block;
-  margin-bottom:15px;
+#projectform {
+  position:relative;
+}
+
+.createname {
+  width:100%;
+}
+
+#createname {
+  width:100%;
 }
 
 #window {
@@ -99,31 +118,43 @@ textarea {
 }
 
 #tasklist {
-  padding:15px;
+  padding:3px;
   background-color:#fff;
 }
 
+#tasklist,
 .task {
+  border-radius:5px;
+}
+
+.projectform, .taskform {
   position:relative;
-  padding:5px;
+}
+
+.task, .taskeditor {
+  position:relative;
+  margin-bottom:5px;
+  padding:6px;
   background-color:#e5e5e5;
 }
 
 .taskname {
-  margin-right:15px;
+  margin-right:8px;
 }
 
 .taskend {
   position:absolute;
-  right:15px;
+  right:0px;
 }
 
 .taskdelete {
   visibility:hidden;
+  margin-right:5px;
 }
 
 .task:hover .taskdelete {
   visibility:visible;
+  padding:5px;
 }
 
 .taskdue {

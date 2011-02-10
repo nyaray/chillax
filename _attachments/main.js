@@ -50,15 +50,40 @@ function refreshTaskList() {
 
           var html =
             '<li class="task" id="'+ id +'">'+
-              '<span class="taskname">'+ name +'</span>'+
-              '<span class="taskend">'+
+            '  <span class="taskname">'+ name +'</span>'+
+            '  <span class="taskend">'+
                 due+
-                '<button type="button" class="taskdelete">x</button>'+
-              '</span>'+
+            '    <span class="taskdelete">x</span>'+
+            '  </span>'+
               desc+
+            '</li>'+
+            '<li class="taskeditor">'+
+            '  <form>'+
+            '    <legend>Edit task</legend>'+
+            '    <input placeholder="Name" class="editname" name="editname"'+
+            '      value="'+ name +'" type="text">'+
+            '    <input placeholder="Due" class="editdue" name="editdue"'+
+            '      value="'+ due +'" type="text"><br>'+
+            '    <textarea placeholder="Description" class="editdesc"'+
+            '      name="editdesc" type="text">'+ desc +'</textarea><br> '+
+            '    <button type="button" class="editsubmit">Save</button>'+
+            '    <button type="button" class="editcancel">Cancel</button>'+
+            '  </form>'+
             '</li>';
           $(taskContainer).append(html);
         }
+
+        $(".taskeditor").animate({"height":"toggle"}, {"duration":0});
+
+        $(".task").dblclick(function() {
+          $(this).next().slideDown("fast");
+          $(this).slideUp("fast");
+        });
+
+        $(".taskeditor").dblclick(function() {
+          $(this).prev().slideDown("fast");
+          $(this).slideUp("fast");
+        });
 
         $(".taskdelete").click(function(event) {
           dbg.prepend("delete clicked<br />");
@@ -102,10 +127,6 @@ function createProject(project, callback) {
   // do stuff to store project in couch
 }
 
-function taskForm(name, due, desc) {
-  // generate a form for the given variables and return it
-}
-
 function writeTask(task, callback) {
   // do stuff to store task in couch
   $db.saveDoc(task, {"success":callback});
@@ -113,7 +134,6 @@ function writeTask(task, callback) {
 
 $(document).ready(function() {
   dbg = $("#debug");
-  $("#projectform").animate({"height":"toggle"}, {"duration":0});
 
   // load data from couch
   refreshProjectList();
@@ -125,24 +145,24 @@ $(document).ready(function() {
   });
 
   $("form .addsubmit").click(function() {
-    var taskName = $(this).parents("form").find(".addname").val();
-    var task     = {};
-    task.type    = "task";
-    task.project = currentProject;
-    task.name    = taskName;
+    var nameInput = $(this).parents("form").find(".addname");
+    var resetName = function() { nameInput.val(''); nameInput.focus(); };
+    var taskName  = nameInput.val();
+
+    var task      = {};
+    task.type     = "task";
+    task.project  = currentProject;
+    task.name     = taskName;
 
     dbg.prepend("storing new task, project: "+currentProject+
       ", name: "+task.name+"<br />");
 
     writeTask(task, function() {
       dbg.prepend("Saved task!<br />");
+      resetName();
       refreshTaskList();
     });
 
     return false;
-  });
-
-  $("#createproj").click(function() {
-    $("#projectform").animate({"height":"toggle"}, {"duration":50});
   });
 });
