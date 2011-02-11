@@ -7,12 +7,16 @@
   </head>
   <body>
     <ul id="container">
-      <li id="header"><h1>Chillax.</h1></li>
+      <li id="header">
+        <h1>Chillax.</h1>
+        <h3>Plan, Gather and Focus.</h3>
+      </li>
     	<li id="sidebar">
-        <h2>Organise</h2>
+        <h2>Categorise</h2> -
+        <h4>Make plans</h4>
         <form id="projectform">
           <input placeholder="Create project" class="createname"
-            name="createname" type="text" /><br />
+            type="text" /><br />
           <button type="button" class="createsubmit">Create</button>
           <button type="button" class="cancelproj cancel">Clear</button>
         </form>
@@ -23,19 +27,18 @@
       </li>
 
     	<li id="window">
-        <h2 id="tasksource"></h2> - 
-        <h3>Focus</h3>
-        <h4>(Gather your tasks)</h4><br />
+        <h2 id="tasksource">Project</h2> - 
+        <h4>Gather your thoughts</h4><br />
 
         <form class="taskform">
-          <input placeholder="Create task" class="addname"
-            name="addname" type="text" />
+          <input placeholder="Create task" class="addname" type="text" />
           <br />
           <button type="button" class="addsubmit">Add</button>
           <button type="button" class="cancel">Cancel</button>
         </form>
 
-        <h2>Tasks</h2>
+        <h2>Tasks</h2> -
+        <h4>Focus</h4><br />
         <ul id="tasklist"></ul>
 
         <h3 style="margin-top:50px;">Debug</h3><br />
