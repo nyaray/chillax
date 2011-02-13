@@ -16,7 +16,7 @@ function updateTask(task, callback) {
     storeTask.project = task.project;
 
     if (task.due && typeof(task.due) == "string" && task.due != "")
-      storeTask = task.due;
+      storeTask.due = task.due;
 
     if (task.desc && typeof(task.desc) == "string" && task.desc != "")
       storeTask.desc = task.desc;
@@ -53,7 +53,7 @@ function refreshProjectList() {
     {"success": projectListRefresher});
 }
 
-function generateTasklistItems(taskContainer, rows) {
+function generateTasklistItems(rows) {
   var tasklistItems = "";
 
   for (i in rows) {
@@ -116,7 +116,8 @@ function refreshTaskList() {
       if(data.rows.length > 0)
       {
         // setup content
-        $("#tasklist").html(generateTasklistItems(taskContainer, data.rows));
+        var taskList = generateTasklistItems(data.rows);
+        $("#tasklist").html(taskList);
         $(".taskeditor").hide();
 
         // set actions
