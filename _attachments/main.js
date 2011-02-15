@@ -28,17 +28,39 @@ function updateTask(task, callback) {
     writeTask(storeTask, callback);
   }});
 }
+function sortProjects() {
+  var items = $('#projectlist > li').get();
+
+  items.sort(function(a,b){ 
+    var keyA = $(a).find("a").html();
+    var keyB = $(b).find("a").html();
+    //console.log("comparing '"+keyA+"' and '"+keyB+"'");
+
+    if (keyA < keyB) return -1;
+    if (keyA > keyB) return 1;
+    return 0;
+  });
+
+  var ul = $('#projectlist');
+
+  $.each(items, function(i, li){
+    ul.append(li);
+  });
+}
 
 function refreshProjectList() {
   var projectListRefresher = function(data) {
+    var ul = $('#projectlist');
     for (i in data.rows) {
       var id   = data.rows[i].id;
       var name = data.rows[i].value;
       var html =
         '<li><a class="projectlink" id="'+id+'" href="#">'+name+'</a></li>';
-      $('#projectlist').append(html);
+      ul.append(html);
       dbg.prepend("added row for:"+id+", "+name+"<br />");
     }
+
+    sortProjects();
 
     $('.projectlink').click(function() {
       var id = $(this).attr('id');
@@ -69,12 +91,12 @@ function generateTasklistItems(rows) {
     var completeStr = ((complete)? "checked ": "");
     var html =
       '<li class="task" id="'+ id +'">'+
+      '  <span class="taskdelete">x</span>'+
       '  <input class="taskcompleted" type="checkbox" '+
       '    value="complete" '+ completeStr +'/>'+
       '  <span class="taskname">'+ name +'</span>'+
       '  <span class="taskend">'+
         ((due != "")? '<span class="taskdue">'+due+'</span>': "")+
-      '    <span class="taskdelete">x</span>'+
       '  </span>'+
         ((desc != "")? '<span class="taskdesc">'+desc+'</span>': "")+
       '</li>'+

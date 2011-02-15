@@ -161,6 +161,7 @@ textarea {
 
 #tasklist,
 .task {
+  position:relative;
   border-radius:5px;
 }
 
@@ -191,13 +192,9 @@ textarea {
 }
 
 .task .taskdelete {
-  visibility:hidden;
-  margin-right:5px;
-}
-
-.task:hover .taskdelete {
-  visibility:visible;
-  padding:5px;
+  position:absolute;
+  top:-1px;
+  right:-20px;
 }
 
 .taskdue {
