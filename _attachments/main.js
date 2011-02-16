@@ -91,7 +91,7 @@ function generateTasklistItems(rows) {
     var completeStr = ((complete)? "checked ": "");
     var html =
       '<li class="task" id="'+ id +'">'+
-      '  <span class="taskdelete">x</span>'+
+      '  <button class="taskdelete">x</button>'+
       '  <input class="taskcompleted" type="checkbox" '+
       '    value="complete" '+ completeStr +'/>'+
       '  <span class="taskname">'+ name +'</span>'+
