@@ -10,44 +10,38 @@
       <li id="header">
         <h1>Chillax.</h1>
         <h3>Plan, Gather and Focus.</h3>
-      </li>
-    	<li id="sidebar">
-        <h2>Categorise</h2> -
-        <h4>Make plans</h4>
-        <form id="projectform">
-          <input placeholder="Create project" class="createname"
-            type="text" /><br />
-          <button type="button" class="createsubmit">Create</button>
-          <button type="button" class="cancelproj cancel">Clear</button>
-        </form>
+      </li><li id="sidebar">
+        <div id="createprojectform">
+          <h2>Categorise</h2> - <h4>Make plans</h4>
+          <input type="text" id="createprojectname"
+            placeholder="Create project" />
+          <button id="createproject">Create</button>
+          <button id="cancelcreateproject">Cancel</button>
+        </div>
 
-        <a class="projectlink" id="inbox" href="#">Inbox</a>
-        <hr />
-        <a class="projectlink" id="today" href="#">Today</a><br />
-        <a class="projectlink" id="horison" href="#">Horison</a>
-        <hr />
-        <ul id="projectlist"></ul>
-      </li>
+        <div id="viewlistcontainer">
+          <a class="projectlink" id="inbox" href="#">Inbox</a>
+          <hr />
+          <a class="viewlink" id="today" href="#">Today</a>
+          <a class="viewlink" id="horison" href="#">Horison</a>
+          <hr />
+          <ul id="projectlist"></ul>
+          <hr />
+          <a class="viewlink" id="archive" href="#">Archive</a>
+          <a class="viewlink" id="trash" href="#">Trash</a>
+        </div>
+      </li><li id="window">
+        <div id="createtaskform">
+          <h2>Tasks</h2> - <h4>Gather your thoughts</h4>
+          <input type="text" id="createtaskname"
+            placeholder="Create task" />
+          <button id="createtask">Create</button>
+          <button id="cancelcreatetask">Cancel</button>
+        </div>
 
-    	<li id="window">
-        <h2>Tasks</h2> -
-        <h4>Gather your thoughts</h4><br />
-
-        <form class="taskform">
-          <input placeholder="Create task" class="addname" type="text" />
-          <br />
-          <button type="button" class="addsubmit">Add</button>
-          <button type="button" class="cancel">Cancel</button>
-        </form>
-
-        <h2 id="tasksource">Project</h2> - 
-        <h4>Focus</h4><br />
-        <ul id="tasklist"></ul>
-
-        <h3 style="margin-top:50px;">Debug</h3><br />
-        <div id="debug" style="width:95%; height:150px;
-          padding:15px; background-color:#ccc; vertical-align:top;
-          overflow:scroll;">
+        <div id="tasklistcontainer">
+          <h2 id="tasksource">Project</h2> - <h4>Focus</h4>
+          <ul id="tasklist"></ul>
         </div>
       </li>
     </ul>
@@ -56,6 +50,8 @@
   <script src="/_utils/script/json2.js"></script>  
   <script src="/_utils/script/jquery.js?1.3.1"></script>  
   <script src="/_utils/script/jquery.couch.js?0.9.0"></script>
-  <script src="./js/functions.js"></script>
-  <script src="./js/main.js"></script>
+  <script src="./js/chillax.js"></script>
+  <script src="./js/chillax-store.js"></script>
+  <script src="./js/chillax-ui.js"></script>
+  <script src="./js/chillax-main.js"></script>
 </html>

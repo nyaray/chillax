@@ -1,10 +1,12 @@
 function(doc) {
   if(doc.type && doc.type == "task")
   {
-    // bare minimum for an emitted task
+    // emit all document that are tasks, this will look funny to the user and
+    // should probably be handled here or in the frontend
     project = (doc.project)? doc.project: "";
     name    = (doc.name)? doc.name: "";
 
+    // bare minimum for an emitted task
     task         = {};
     task.type    = doc.type;
     task.project = project;
