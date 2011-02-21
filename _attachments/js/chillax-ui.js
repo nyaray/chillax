@@ -88,23 +88,13 @@ $chillax.ui.refreshProjects = function() {
 $chillax.ui._createTasks = function(rows) {
   var taskList = [];
 
-  var saveText = document.createTextNode('Save');
-  var cancelText = document.createTextNode('Cancel');
-  var deleteText = document.createTextNode('De');
-  var archiveText = document.createTextNode('Ar');
-
-  var saveButton    = document.createElement('button');
-  var cancelButton  = document.createElement('button');
+  var deleteText = document.createTextNode('Del');
+  var archiveText = document.createTextNode('Arch');
   var deleteButton  = document.createElement('button');
   var archiveButton = document.createElement('button');
 
-  saveButton.setAttribute('class', 'taskSaveButton');
-  cancelButton.setAttribute('class', 'taskCancelButton');
   deleteButton.setAttribute('class', 'taskDeleteButton');
   archiveButton.setAttribute('class', 'taskArchiveButton');
-
-  saveButton.appendChild(saveText);
-  cancelButton.appendChild(cancelText);
   deleteButton.appendChild(deleteText);
   archiveButton.appendChild(archiveText);
 
@@ -112,64 +102,62 @@ $chillax.ui._createTasks = function(rows) {
     var payload  = rows[i].value;
 
     var id       = rows[i].id;
-    var name     = document.createTextNode(payload.name);
-    var complete = (payload.complete && payload.complete == true)?
-      payload.complete: false;
-    var today    = payload.today !== undefined;
     
     // TODO: show that a task is overdue by adding a class to its corresponding
     // li element.
     var taskItem = document.createElement('li');
-    var nameLabel = document.createElement('span');
+    taskItem.setAttribute('id', id);
+    taskItem.setAttribute('class', 'task');
+
+    var nameLabel = document.createElement('input');
+    nameLabel.setAttribute('type', 'text');
+    nameLabel.setAttribute('class', 'taskNameLabel');
+    nameLabel.setAttribute('field', 'name');
+    nameLabel.setAttribute('value', payload.name);
 
     var todayChecker    = document.createElement('input');
     var completeChecker = document.createElement('input');
+    var today    = (payload.today)?    payload.today:    'off';
+    var complete = (payload.complete)? payload.complete: 'off';
 
-    nameLabel.setAttribute('class', 'taskNameLabel');
-    todayChecker.setAttribute('type', 'checkbox');
+       todayChecker.setAttribute('type', 'checkbox');
     completeChecker.setAttribute('type', 'checkbox');
-    if (complete) completeChecker.setAttribute('checked', 'checked');
-    if (today) todayChecker.setAttribute('checked', 'checked');
-    todayChecker.setAttribute('class', 'taskTodayChecker');
+       todayChecker.setAttribute('class', 'taskTodayChecker');
     completeChecker.setAttribute('class', 'taskCompleteChecker');
+    if (today    === 'on')    todayChecker.setAttribute('checked', 'checked');
+    if (complete === 'on') completeChecker.setAttribute('checked', 'checked');
+       todayChecker.setAttribute('field', 'today');
+    completeChecker.setAttribute('field', 'complete');
 
-    nameLabel.appendChild(name);
-
-    taskItem.setAttribute('id', id);
-    taskItem.setAttribute('class', 'task');
-    // delete, archive, today, complete, name, due, tags, desc, save, cancel
     taskItem.appendChild(deleteButton.cloneNode(true));
     taskItem.appendChild(archiveButton.cloneNode(true));
     taskItem.appendChild(todayChecker);
     taskItem.appendChild(completeChecker);
     taskItem.appendChild(nameLabel);
 
-    if (payload.due) {
-      var due = document.createTextNode((payload.due)? payload.due: "N/A");
-      var dueLabel = document.createElement('span');
-      dueLabel.setAttribute('class', 'taskDueLabel');
-      dueLabel.appendChild(due);
-      taskItem.appendChild(dueLabel);
+    var dueLabel = document.createElement('input');
+    dueLabel.setAttribute('type', 'text');
+    dueLabel.setAttribute('class', 'taskDueLabel');
+    dueLabel.setAttribute('field', 'due');
+    dueLabel.setAttribute('value', (payload.due)? payload.due: "");
+    taskItem.appendChild(dueLabel);
+
+    if (payload.desc) {
+      var desc = document.createTextNode((payload.desc)? payload.desc: "");
+      var descLabel = document.createElement('textarea');
+      descLabel.setAttribute('class', 'taskDescLabel');
+      descLabel.setAttribute('field', 'desc');
+      descLabel.appendChild(desc);
+      taskItem.appendChild(descLabel);
     }
 
-    if (payload.tags) {
-      var tags     = document.createTextNode("N/A");
+    if (false && payload.tags) {
+      var tags     = document.createTextNode("");
       var tagsLabel = document.createElement('span');
       tagsLabel.setAttribute('class', 'taskTagsLabel');
       tagsLabel.appendChild(tags);
       taskItem.appendChild(tagsLabel);
     }
-
-    if (payload.desc) {
-      var desc = document.createTextNode((payload.desc)? payload.desc: "N/A");
-      var descLabel = document.createElement('textarea');
-      descLabel.setAttribute('class', 'taskDescLabel');
-      descLabel.appendChild(desc);
-      taskItem.appendChild(descLabel);
-    }
-
-    taskItem.appendChild(saveButton.cloneNode(true));
-    taskItem.appendChild(cancelButton.cloneNode(true));
 
     taskList.push(taskItem);
   }
@@ -177,31 +165,32 @@ $chillax.ui._createTasks = function(rows) {
   return taskList;
 };
 
-$chillax.ui._setupTasks = function() {
-  $(".taskDeleteButton").click(function(event) {
-    alert("task deleted");
-  });
+$chillax.ui._setupTasks = (function() {
+  var updateSuccess = function() {
+    console.log("Saved changes!");
+  };
 
-  $(".taskArchiveButton").click(function(event) {
-    alert("task archived");
-  });
+  return function() {
+    $("#tasklist .taskDeleteButton").click(function(event) {
+      alert("task deleted");
+    });
 
-  $('.taskTodayChecker').click(function() {
-    alert("task todayed");
-  });
+    $("#tasklist .taskArchiveButton").click(function(event) {
+      alert("task archived");
+    });
 
-  $('.taskCompleteChecker').click(function() {
-    alert("task completed");
-  });
-
-  $(".taskSaveButton").click(function() {
-    alert("task saved");
-  });
-
-  $(".taskCancelButton").click(function() {
-    alert("task saving cancelled");
-  });
-}
+    $("#tasklist .task input, #tasklist .task textarea, "+
+      "#tasklist .taskTodayChecker, #tasklist .task taskCompleteChecker").
+    change(function(event){
+      var target = $(this);
+      var taskId = target.parent().attr('id');
+      var field  = target.attr('field');
+      var value  = target.attr('value');
+      console.log("updating:"+taskId+"#"+field+"#"+value);
+      $chillax.store.updateTaskField(taskId, field, value, updateSuccess);
+    });
+  }
+}());
 
 $chillax.ui.refreshTasklist = function(project) {
   $chillax.store.getProjectTasks(project, function(rows) {
@@ -213,6 +202,7 @@ $chillax.ui.refreshTasklist = function(project) {
     }
 
     $chillax.ui._setupTasks();
+    //$("#tasklist button").button();
   });
 };
 
@@ -227,5 +217,7 @@ $chillax.ui.init = function() {
 
   $chillax.ui.refreshProjects();
   $chillax.ui.changeProject("inbox", "Inbox");
+
+  //$("button").button();
 };
 

@@ -55,6 +55,25 @@ $chillax.store.updateTask = (function () {
   };
 }());
 
+$chillax.store.updateTaskField = (function() {
+  var taskUpdater = function(oldTask, field, value, callback) {
+    // assertions
+    assert(oldTask._id !== undefined && oldTask.type !== undefined &&
+      oldTask.type === "task", "taskUpdater, oldTask");
+
+    oldTask[field] = value;
+    $chillax.store.writeTask(oldTask, callback);
+  };
+
+  return function(taskId, field, value, callback) {
+    $chillax.store._db.openDoc(taskId, {
+      "success": function(oldTask) {
+        taskUpdater(oldTask, field, value, callback);
+      }
+    });
+  };
+}());
+
 // takes a callback that in turn takes the array of rows in the view, i.e. the
 // projects
 $chillax.store.getProjects = (function () {

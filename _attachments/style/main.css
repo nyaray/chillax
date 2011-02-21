@@ -1,3 +1,15 @@
+h2, h4 {
+  font-size:22pt;
+}
+
+h4 {
+  font-size:14pt;
+}
+
+.ui-button {
+  font-size:62.5%;
+}
+
 #container {
   width:960px;
   margin:0 auto;
@@ -37,8 +49,7 @@
 #createprojectform h2, #createprojectform h4,
 #createtaskform    h2, #createtaskform    h4,
 #tasklistcontainer h2, #tasklistcontainer h4 {
-  display:inline-block;
-  vertical-align:top;
+  display:inline;
 }
 
 #createprojectname, #createtaskname {
@@ -53,11 +64,12 @@
 
 .task {
   position:relative;
-  min-height:50px;
+  min-height:15px;
+  margin-right:50px;
   margin-bottom:15px;
   padding:10px;
-  padding-left:20px;
-  padding-bottom:30px;
+  padding-left:30px;
+  padding-bottom:20px;
   background-color:#ccc;
 }
 
@@ -66,14 +78,14 @@
   vertical-align:top;
 }
 
-.taskTagsLabel {
+.taskTagsLabel, .taskSaveButton, .taskCancelButton {
   display:none;
 }
 
 .taskDeleteButton, .taskArchiveButton {
   position:absolute;
   top:5px;
-  right:5px;
+  right:-50px;
 }
 
 .taskArchiveButton {
@@ -82,20 +94,25 @@
 
 .taskTodayChecker {
   position:absolute;
-  left:2px;
+  left:7px;
+  opacity:0.5;
 }
 
-.taskSaveButton, .taskCancelButton {
-  position:absolute;
-  left:20px;
-  bottom:5px;
+.taskTodayChecker:hover, .taskTodayChecker.todaySet {
+  opacity:1;
 }
 
-.taskCancelButton {
-  left:64px;
+.taskNameLabel {
+  width:430px;
+}
+
+.taskDueLabel {
+  float:right;
+  margin-right:4px;
 }
 
 .taskDescLabel {
-  width:610px;
+  width:580px;
   height:70px;
+  margin-top:5px;
 }

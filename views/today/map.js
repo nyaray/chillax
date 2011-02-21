@@ -1,5 +1,5 @@
 function(doc) {
-  if(doc.type && doc.type === "task") {
+  if(doc.type && doc.type === "task" && doc.today && doc.today === "on") {
     // emit all document that are tasks, this will look funny to the user and
     // should probably be handled here or in the frontend
     project = (doc.project)? doc.project: "";
@@ -15,9 +15,9 @@ function(doc) {
     if(doc.desc && doc.desc !== "") task.desc = doc.desc;
     if(doc.due  && doc.due  !== "") task.due = doc.due;
     if(doc.today    && doc.today    === 'on') task.today = doc.today;
-    if(doc.complete && (doc.complete === 'on' || doc.complete === true))
-      task.complete = 'on';
+    if(doc.complete && doc.complete === 'on') task.complete = doc.complete;
 
     emit(project, task);
   }
 }
+
