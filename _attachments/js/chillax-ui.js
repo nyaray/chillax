@@ -1,5 +1,8 @@
 $chillax.ui = {};
 
+$chillax.ui._projectId = "inbox";
+$chillax.ui._projectName = "Inbox";
+
 $chillax.ui._projectList = null;
 $chillax.ui._taskList = null;
 
@@ -102,7 +105,7 @@ $chillax.ui._createTasks = function(rows) {
     var payload  = rows[i].value;
 
     var id       = rows[i].id;
-    
+
     // TODO: show that a task is overdue by adding a class to its corresponding
     // li element.
     var taskItem = document.createElement('li');
@@ -171,12 +174,18 @@ $chillax.ui._setupTasks = (function() {
   };
 
   return function() {
-    $("#tasklist .taskDeleteButton").click(function(event) {
-      alert("task deleted");
+    $("#tasklist .task .taskDeleteButton").click(function() {
+      var taskId = $(this).parent().attr('id');
+      var callback = function() {
+        alert("Deleted task with id "+taskId);
+        $("#tasklist li#"+taskId).remove();
+      };
+
+      $chillax.store.deleteTask(taskId, callback);
     });
 
-    $("#tasklist .taskArchiveButton").click(function(event) {
-      alert("task archived");
+    $("#tasklist .task .taskArchiveButton").click(function() {
+      alert("Archiving task with id "+$(this).parent().attr('id'));
     });
 
     $("#tasklist .task input, #tasklist .task textarea, "+
@@ -202,13 +211,14 @@ $chillax.ui.refreshTasklist = function(project) {
     }
 
     $chillax.ui._setupTasks();
-    //$("#tasklist button").button();
   });
 };
 
 $chillax.ui.changeProject = function(id, projectName) {
-  $("#tasksource").html(projectName);
+  $chillax.ui._projectId = id;
+  $chillax.ui._projectName = projectName;
   $chillax.ui.refreshTasklist(id);
+  $("#tasksource").html(projectName);
 };
 
 $chillax.ui.init = function() {
@@ -218,6 +228,34 @@ $chillax.ui.init = function() {
   $chillax.ui.refreshProjects();
   $chillax.ui.changeProject("inbox", "Inbox");
 
-  //$("button").button();
+  $('.createname').keypress(function(event){
+    if (event.which === 13) {
+      console.log($(this));
+      $(this).parent().find('.createbutton').click();
+    }
+  });
+
+  $('#createtask').click(function() {
+    var name = $(this).parent().find('#createtaskname');
+    var nameStr = name.val();
+    if (nameStr === "")
+    {
+      // do stuff appropriate for when no name is given
+
+      return;
+    }
+
+    var task = {
+      "type":"task",
+      "project":$chillax.ui._projectId,
+      "name":nameStr
+    };
+
+    name.val('');
+    $chillax.store.createTask(task, function(){
+      console.log("Created task");
+      $chillax.ui.refreshTasklist($chillax.ui._projectId);
+    });
+  });
 };
 

@@ -2,6 +2,17 @@ $chillax.store = {};
 
 $chillax.store._db = null;
 
+$chillax.store.createTask = function (task, callback) {
+  assert(typeof(callback) === "function", "writeTask, callback");
+
+  console.log("saveDoc");
+  console.log(task);
+
+  return $chillax.store._db.saveDoc(task, {
+    "success": callback
+  });
+};
+
 $chillax.store.writeTask = function (task, callback) {
   assert(task._id !== undefined, "writeTask, task");
   assert(typeof(callback) === "function", "writeTask, callback");
@@ -96,7 +107,7 @@ $chillax.store.getProjects = (function () {
 
 // TODO: Write this in a sexier way...
 $chillax.store.deleteTask = function (taskId, callback) {
-  $chillax.store._db.openDoc(taskID, {
+  $chillax.store._db.openDoc(taskId, {
     "success": function (doc) {
       $chillax.store._db.removeDoc(doc, {
         "success": callback

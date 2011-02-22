@@ -4,8 +4,8 @@
     <title>Chillax. It's under control.</title>
     <link rel="stylesheet" href="style/reset.css" type="text/css">
     <link rel="stylesheet" href="style/main.css" type="text/css">
-    <link rel="stylesheet" href="style/ui-lightness/jquery-ui-1.8.9.custom.css"
-      type="text/css">
+    <link rel="stylesheet"
+      href="style/ui-lightness/jquery-ui-1.8.9.custom.css" type="text/css">
   </head>
   <body>
     <ul id="container">
@@ -14,11 +14,12 @@
         <h3>Plan, Gather and Focus.</h3>
       </li><li id="sidebar">
         <div id="createprojectform">
-          <h2>Categorise</h2> - <h4>Make plans</h4>
+          <h2>Categorise</h2> <h4>Make plans</h4>
           <input type="text" id="createprojectname"
-            placeholder="Create project" />
-          <button id="createproject">Create</button>
-          <button id="cancelcreateproject">Cancel</button>
+            class="createname" placeholder="Create project" />
+          <button id="createproject" class="createbutton">Create</button>
+          <button id="cancelcreateproject"
+            class="cancelcreatebutton">Cancel</button>
         </div>
 
         <div id="viewlistcontainer">
@@ -34,15 +35,16 @@
         </div>
       </li><li id="window">
         <div id="createtaskform">
-          <h2>Tasks</h2> - <h4>Gather your thoughts</h4>
+          <h2>Tasks</h2> <h4>Gather your thoughts</h4>
           <input type="text" id="createtaskname"
-            placeholder="Create task" />
-          <button id="createtask">Create</button>
-          <button id="cancelcreatetask">Cancel</button>
+            class="createname" placeholder="Create task" />
+          <button id="createtask" class="createbutton">Create</button>
+          <button id="cancelcreatetask"
+            class="cancelcreatebutton">Cancel</button>
         </div>
 
         <div id="tasklistcontainer">
-          <h2 id="tasksource">Project</h2> - <h4>Focus</h4>
+          <h2 id="tasksource">Project</h2> <h4>Focus</h4>
           <ul id="tasklist"></ul>
         </div>
       </li>
