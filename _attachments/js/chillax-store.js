@@ -2,24 +2,24 @@ $chillax.store = {};
 
 $chillax.store._db = null;
 
-$chillax.store.createTask = function (task, callback) {
-  assert(typeof(callback) === "function", "writeTask, callback");
+$chillax.store._writeDoc = function(doc, callback) {
+  assert(typeof(callback) === "function", "writeProject, callback");
 
-  console.log("saveDoc");
-  console.log(task);
-
-  return $chillax.store._db.saveDoc(task, {
+  return $chillax.store._db.saveDoc(doc, {
     "success": callback
   });
 };
 
-$chillax.store.writeTask = function (task, callback) {
-  assert(task._id !== undefined, "writeTask, task");
-  assert(typeof(callback) === "function", "writeTask, callback");
+$chillax.store.writeProject = function (project, callback) {
+  assert(project.type && project.type === "project", "writeProject");
+  // TODO:
+  // assert that checks if rev is present and demands that _id also exists
+  $chillax.store._writeDoc(project, callback);
+};
 
-  $chillax.store._db.saveDoc(task, {
-    "success": callback
-  });
+$chillax.store.writeTask = function (task, callback) {
+  assert(task.type && task.type === "task", "writeTask");
+  $chillax.store._writeDoc(task, callback);
 };
 
 $chillax.store.updateTask = (function () {

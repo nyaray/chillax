@@ -1,6 +1,8 @@
-* {
-  text-decoration:none;
-}
+a { text-decoration:none; }
+a:link    { color:#272; }
+a:visited { color:#272; }
+a:hover   { color:#6b6; }
+a:active  { color:#6b6; }
 
 a, button,
 h1, h2, h3, h4, h5, h6 {

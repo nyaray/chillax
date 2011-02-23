@@ -235,6 +235,27 @@ $chillax.ui.init = function() {
     }
   });
 
+  $('#createproject').click(function() {
+    var name = $(this).parent().find('#createprojectname');
+    var nameStr = name.val();
+    if (nameStr === "")
+    {
+      // do stuff appropriate for when no name is given
+
+      return;
+    }
+
+    var project = {
+      "type":"project",
+      "name":nameStr
+    };
+
+    $chillax.store.writeProject(project, function(){
+      console.log("Created project");
+      $chillax.ui.refreshProjects();
+    });
+  });
+
   $('#createtask').click(function() {
     var name = $(this).parent().find('#createtaskname');
     var nameStr = name.val();
@@ -252,7 +273,7 @@ $chillax.ui.init = function() {
     };
 
     name.val('');
-    $chillax.store.createTask(task, function(){
+    $chillax.store.writeTask(task, function(){
       console.log("Created task");
       $chillax.ui.refreshTasklist($chillax.ui._projectId);
     });
