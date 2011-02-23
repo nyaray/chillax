@@ -169,35 +169,71 @@ $chillax.ui._createTasks = function(rows) {
 };
 
 $chillax.ui._setupTasks = (function() {
-  var updateSuccess = function() {
-    console.log("Saved changes!");
-  };
-
-  return function() {
-    $("#tasklist .task .taskDeleteButton").click(function() {
+  var deleteCallback = function() {
+    if(confirm("Do you really want to delete this task?")) {
       var taskId = $(this).parent().attr('id');
       var callback = function() {
-        alert("Deleted task with id "+taskId);
+        console.log("Deleted task with id "+taskId);
         $("#tasklist li#"+taskId).remove();
       };
 
       $chillax.store.deleteTask(taskId, callback);
-    });
+    }
+  };
 
-    $("#tasklist .task .taskArchiveButton").click(function() {
+  var archiveCallback = function() {
       alert("Archiving task with id "+$(this).parent().attr('id'));
-    });
+  };
 
-    $("#tasklist .task input, #tasklist .task textarea, "+
-      "#tasklist .taskTodayChecker, #tasklist .task taskCompleteChecker").
-    change(function(event){
+  var changeSuccess = function() {
+    console.log('Saved changes');
+    // stuff to do on success
+  };
+
+  var changeCallback = function(event){
       var target = $(this);
       var taskId = target.parent().attr('id');
       var field  = target.attr('field');
       var value  = target.attr('value');
       console.log("updating:"+taskId+"#"+field+"#"+value);
-      $chillax.store.updateTaskField(taskId, field, value, updateSuccess);
-    });
+      $chillax.store.updateTaskField(taskId,
+                                     field,
+                                     value,
+                                     changeSuccess);
+  };
+
+  var newDescBlur = function() {
+    if ($(this).val() === "") {
+      $(this).remove();
+    }
+  };
+
+  var doubleclickCallback = function() {
+    var textareas = $(this).parent().find("textarea");
+    var textarea  = (textareas.length == 1)? textareas[0]: null;
+    if (textarea !== null) {
+      $(textarea).focus();
+    }
+    else {
+      textarea = document.createElement('textarea');
+      textarea.setAttribute('class', 'taskDescLabel');
+      textarea.setAttribute('field', 'desc');
+
+      $(textarea).change(changeCallback);
+      $(textarea).blur(newDescBlur);
+
+      $(this).append(textarea);
+    }
+  };
+
+  return function() {
+    $("#tasklist li .taskDeleteButton").click(deleteCallback);
+    $("#tasklist li .taskArchiveButton").click(archiveCallback);
+    $("#tasklist li input, "+
+      "#tasklist li textarea, "+
+      "#tasklist li .taskTodayChecker, "+
+      "#tasklist li .taskCompleteChecker").change(changeCallback);
+    $("#tasklist li").dblclick(doubleclickCallback);
   }
 }());
 
@@ -224,6 +260,12 @@ $chillax.ui.changeProject = function(id, projectName) {
 $chillax.ui.init = function() {
   $chillax.ui._projectList = document.getElementById('projectlist');
   $chillax.ui._taskList    = document.getElementById('tasklist');
+
+  $(".projectlink").click(function() {
+    var id = $(this).attr('id');
+    var name = $(this).html();
+    $chillax.ui.changeProject(id, name);
+  });
 
   $chillax.ui.refreshProjects();
   $chillax.ui.changeProject("inbox", "Inbox");
