@@ -50,7 +50,13 @@ $chillax.ui._sortProjects = function() {
   }
 };
 
-$chillax.ui.refreshProjects = function() {
+$chillax.ui.refreshProjects = (function() {
+  var projectClicker = function(e) {
+      e.preventDefault();
+      $chillax.ui.changeProject($(this).attr('id'), $(this).html());
+      return false;
+  };
+
   var refresher = function(rows) {
     var projectList = $chillax.ui._projectList;
 
@@ -75,18 +81,16 @@ $chillax.ui.refreshProjects = function() {
     }
 
     // set triggers for projects
-    $(".projectLink").click(function(e) {
-      e.preventDefault();
-      $chillax.ui.changeProject($(this).attr('id'), $(this).html());
-      return false;
-    });
+    $(".projectLink").click(projectClicker);
 
     // sort projects
     $chillax.ui._sortProjects();
   };
 
-  $chillax.store.getProjects(refresher);
-};
+  return function() {
+    $chillax.store.getProjects(refresher);
+  };
+}());
 
 $chillax.ui._createTasks = function(rows) {
   var taskList = [];
@@ -208,9 +212,11 @@ $chillax.ui._setupTasks = (function() {
     }
   };
 
-  var doubleclickCallback = function() {
-    var textareas = $(this).parent().find("textarea");
+  var doubleclickCallback = function(event) {
+    var task      = event.target;
+    var textareas = $(task).find("textarea");
     var textarea  = (textareas.length == 1)? textareas[0]: null;
+
     if (textarea !== null) {
       $(textarea).focus();
     }
@@ -222,7 +228,8 @@ $chillax.ui._setupTasks = (function() {
       $(textarea).change(changeCallback);
       $(textarea).blur(newDescBlur);
 
-      $(this).append(textarea);
+      $(task).append(textarea);
+      $(textarea).focus();
     }
   };
 
@@ -272,9 +279,13 @@ $chillax.ui.init = function() {
 
   $('.createname').keypress(function(event){
     if (event.which === 13) {
-      console.log($(this));
+      //console.log($(this));
       $(this).parent().find('.createbutton').click();
     }
+  });
+
+  $('.cancelbutton').click(function() {
+    $(this).parent().find('input').val('');
   });
 
   $('#createproject').click(function() {
@@ -294,6 +305,7 @@ $chillax.ui.init = function() {
 
     $chillax.store.writeProject(project, function(){
       console.log("Created project");
+      name.parent().find('.cancelbutton').click();
       $chillax.ui.refreshProjects();
     });
   });
@@ -314,9 +326,9 @@ $chillax.ui.init = function() {
       "name":nameStr
     };
 
-    name.val('');
     $chillax.store.writeTask(task, function(){
       console.log("Created task");
+      name.parent().find('.cancelbutton').click();
       $chillax.ui.refreshTasklist($chillax.ui._projectId);
     });
   });
