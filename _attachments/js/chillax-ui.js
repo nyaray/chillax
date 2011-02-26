@@ -214,8 +214,11 @@ $chillax.ui._setupTasks = (function() {
 
   var doubleclickCallback = function(event) {
     var task      = event.target;
+    //console.log("task double clicked, target:");
+    //console.log(task);
     var textareas = $(task).find("textarea");
     var textarea  = (textareas.length == 1)? textareas[0]: null;
+    //console.log(textarea);
 
     if (textarea !== null) {
       $(textarea).focus();
