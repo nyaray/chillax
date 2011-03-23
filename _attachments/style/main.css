@@ -16,7 +16,7 @@ a:active  { color:#666; }
 
 a, button,
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -71,15 +71,30 @@ hr {
 
 header {
   display:block;
-  padding:14px 10px 10px;
+  padding: 12px 10px 7px;
   text-align: left;
-  color: #f0f0f0;
-  background-color: #222;
+  color: #fff;
+  border-bottom: 2px solid #0CAAD1;
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.26, rgb(33,33,33)),
+      color-stop(0.83, rgb(56,55,56))
+  );
+  background-image: -moz-linear-gradient(
+      center bottom,
+      rgb(33,33,33) 26%,
+      rgb(56,55,56) 83%
+  );
 }
 
 
 header h1 {
-  font-size:12pt;
+  font-size:11pt;
+  margin: 10px 0px 0px;
+  line-height: 0;
+  text-shadow: #000 0px 1px 0px;
 }
 
 #sidebar {
@@ -87,12 +102,12 @@ header h1 {
   position:absolute;
   height:auto;
   bottom:0;
-  top:40px;
+  top:37px;
   left:0;
   right:0;
-  padding:0px 15px 0px 15px;
+  padding:5px 15px 0px 15px;
   width:270px;
-  border-right: 1px solid black;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 #createprojectform, #createtaskform, #viewlistcontainer, #tasklistcontainer {
@@ -132,11 +147,12 @@ header h1 {
   position:absolute;
   height:auto;
   bottom:0;
-  top:40px;
+  top:37px;
   left:301px;
   right:0;
-  padding:0 15px;
+  padding:5px 15px 0px 15px;
   width:679px;
+  border-left: 1px solid #fff;
 }
 
 #window input[type=text] {
