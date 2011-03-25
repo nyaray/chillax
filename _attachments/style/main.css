@@ -110,29 +110,29 @@ header h1 {
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 #inbox {
-  background: transparent url(../img/newspaper.png) no-repeat 0 0;
+  background: transparent url(../img/icons/newspaper.png) no-repeat 0 0;
   padding:0 0 0 23px;
 }
 
 #today {
-  background: transparent url(../img/star.png) no-repeat 0 0;
+  background: transparent url(../img/icons/star.png) no-repeat 0 0;
   padding:0 0 0 23px;
 }
 #horison {
-  background: transparent url(../img/anchor.png) no-repeat 0 0;
+  background: transparent url(../img/icons/anchor.png) no-repeat 0 0;
   padding:0 0 0 23px;
 }
 #archive {
-  background: transparent url(../img/book.png) no-repeat 0 0;
+  background: transparent url(../img/icons/book.png) no-repeat 0 0;
   padding:0 0 0 23px;
 }
 #trash {
-  background: transparent url(../img/bin.png) no-repeat -2px 0;
+  background: transparent url(../img/icons/bin.png) no-repeat -2px 0;
   padding:0 0 0 23px;
 }
 
 .projectLink {
-  background: transparent url(../img/note.png) no-repeat 0 0;
+  background: transparent url(../img/icons/note.png) no-repeat 0 0;
   padding:0 0 0 23px;
 }
 
@@ -236,12 +236,12 @@ header h1 {
   background-color:#ccc;
 }
 .taskDeleteButton {
-  background: #fff url(../img/bin.png) no-repeat 3px 4px;
+  background: #fff url(../img/icons/bin.png) no-repeat 3px 4px;
   right:8px;
 }
 .taskArchiveButton {
   right:38px;
-  background: #fff url(../img/book.png) no-repeat 5px 4px;
+  background: #fff url(../img/icons/book.png) no-repeat 5px 4px;
 }
 
 .taskTodayChecker {
