@@ -11,7 +11,7 @@ body {
 a { text-decoration:none; text-shadow: #fff 0 1px 0;}
 a:link    { color:#333; }
 a:visited { color:#333; }
-a:hover   { color:#666; }
+a:hover   { color:#666; text-decoration:underline; }
 a:active  { color:#666; }
 
 a, button,
@@ -71,7 +71,7 @@ hr {
 
 header {
   display:block;
-  padding: 12px 10px 7px;
+  padding: 12px 10px 13px;
   text-align: left;
   color: #fff;
   border-bottom: 2px solid #0CAAD1;
@@ -109,6 +109,33 @@ header h1 {
   width:270px;
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
+#inbox {
+  background: transparent url(../img/newspaper.png) no-repeat 0 0;
+  padding:0 0 0 23px;
+}
+
+#today {
+  background: transparent url(../img/star.png) no-repeat 0 0;
+  padding:0 0 0 23px;
+}
+#horison {
+  background: transparent url(../img/anchor.png) no-repeat 0 0;
+  padding:0 0 0 23px;
+}
+#archive {
+  background: transparent url(../img/book.png) no-repeat 0 0;
+  padding:0 0 0 23px;
+}
+#trash {
+  background: transparent url(../img/bin.png) no-repeat -2px 0;
+  padding:0 0 0 23px;
+}
+
+.projectLink {
+  background: transparent url(../img/note.png) no-repeat 0 0;
+  padding:0 0 0 23px;
+}
+
 
 #createprojectform, #createtaskform, #viewlistcontainer, #tasklistcontainer {
   padding:10px 0;
@@ -135,7 +162,7 @@ header h1 {
 }
 
 #sidebar input[type=text] {
-  border:1px solid #ccc;
+  border:2px solid #ccc;
   padding: 10px 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -156,22 +183,27 @@ header h1 {
 }
 
 #window input[type=text] {
-  border:1px solid #ccc;
+  border:2px solid #ccc;
   padding: 10px 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
 }
-
+#window input[type=checkbox] {
+  height:15px;
+  width:15px;
+  position:relative;
+  top:9px;
+}
 .task {
   position:relative;
   min-height:15px;
-  margin-right:50px;
-  margin-bottom:15px;
-  padding:10px;
-  padding-left:30px;
-  padding-bottom:20px;
-  background-color:#ccc;
+  padding:15px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+  
 }
 
 .task > * {
@@ -187,18 +219,37 @@ header h1 {
 
 .taskDeleteButton, .taskArchiveButton {
   position:absolute;
-  top:5px;
-  right:-50px;
+  top:23px;
+  border:0;
+  text-indent:-9999px;
+  width:25px;
+  height:25px;
+  cursor:pointer;
+  border-radius: 4px; 
+  -webkit-border-radius: 4px; 
+  -moz-border-radius: 4px; 
+  
 }
-
+.taskDeleteButton:hover, .taskArchiveButton:hover {
+  top:24px;
+  cursor:pointer;
+  background-color:#ccc;
+}
+.taskDeleteButton {
+  background: #fff url(../img/bin.png) no-repeat 3px 4px;
+  right:8px;
+}
 .taskArchiveButton {
-  top:28px;
+  right:38px;
+  background: #fff url(../img/book.png) no-repeat 5px 4px;
 }
 
 .taskTodayChecker {
   position:absolute;
   left:7px;
   opacity:0.5;
+/* display: block when implemented */
+  display:none; 
 }
 
 .taskTodayChecker:hover, .taskTodayChecker.todaySet {
@@ -206,12 +257,13 @@ header h1 {
 }
 
 .taskNameLabel {
-  width:380px;
+  width:410px;
+  margin-left:10px;
 }
 
 .taskDueLabel {
   float:right;
-  margin-right:4px;
+  margin-right:60px;
 }
 
 .taskDescLabel {

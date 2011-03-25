@@ -127,13 +127,13 @@ $chillax.ui._createTasks = function(rows) {
     var today    = (payload.today)?    payload.today:    'off';
     var complete = (payload.complete)? payload.complete: 'off';
 
-       todayChecker.setAttribute('type', 'checkbox');
+    todayChecker.setAttribute('type', 'checkbox');
     completeChecker.setAttribute('type', 'checkbox');
-       todayChecker.setAttribute('class', 'taskTodayChecker');
+    todayChecker.setAttribute('class', 'taskTodayChecker');
     completeChecker.setAttribute('class', 'taskCompleteChecker');
     if (today    === 'on')    todayChecker.setAttribute('checked', 'checked');
     if (complete === 'on') completeChecker.setAttribute('checked', 'checked');
-       todayChecker.setAttribute('field', 'today');
+    todayChecker.setAttribute('field', 'today');
     completeChecker.setAttribute('field', 'complete');
 
     taskItem.appendChild(deleteButton.cloneNode(true));
@@ -145,9 +145,12 @@ $chillax.ui._createTasks = function(rows) {
     var dueLabel = document.createElement('input');
     dueLabel.setAttribute('type', 'text');
     dueLabel.setAttribute('class', 'taskDueLabel');
+    dueLabel.setAttribute('placeholder', 'Due');
     dueLabel.setAttribute('field', 'due');
     dueLabel.setAttribute('value', (payload.due)? payload.due: "");
     taskItem.appendChild(dueLabel);
+    
+    //ASFDASDASDSD
 
     if (payload.desc) {
       var desc = document.createTextNode((payload.desc)? payload.desc: "");
